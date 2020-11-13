@@ -1,16 +1,15 @@
 # Docs:
 # https://aka.ms/yaml
-
 trigger:
-    batch: true
-    branches:
-      include:
+  batch: true
+  branches:
+    include:
       - master
   
  
-stages:
+stages :
 - stage: CI
-    jobs:
+  jobs:
     - job: Resource_locks
         pool:
         vmImage: 'Ubuntu 16.04'
