@@ -10,8 +10,6 @@ trigger:
  
   stages:
     - stage: CI
-       parameters:
-         serviceConnection: ''
        jobs:
         - job: Resource_locks
           pool:
@@ -22,6 +20,5 @@ trigger:
             displayName: 'Enable resource locks'
             inputs:
               scriptType: bash
-              azureSubscription: ${{ parameters.serviceConnection }}
               scriptLocation: scriptPath
               scriptPath: scripts/apply-resource-locking.sh
