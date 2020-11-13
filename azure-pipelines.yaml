@@ -10,14 +10,14 @@ trigger:
 stages :
 - stage: CI
   jobs:
-    - job: Resource_locks
-        pool:
-        vmImage: 'Ubuntu 16.04'
-        timeoutInMinutes: 600
-        steps:
-        - task: AzureCLI@1
-        displayName: 'Enable resource locks'
-        inputs:
-            scriptType: bash
-            scriptLocation: scriptPath
-            scriptPath: scripts/apply-resource-locking.sh
+  - job: Resource_locks
+    pool:
+    vmImage: 'Ubuntu 16.04'
+    timeoutInMinutes: 600
+    steps:
+    - task: AzureCLI@1
+      displayName: 'Enable resource locks'
+      inputs:
+        scriptType: bash
+        scriptLocation: scriptPath
+        scriptPath: scripts/apply-resource-locking.sh
