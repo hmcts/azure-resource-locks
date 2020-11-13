@@ -12,8 +12,8 @@ stages :
   jobs:
   - job: Resource_locks
     pool:
-    vmImage: 'Ubuntu 16.04'
-    timeoutInMinutes: 600
+      vmImage: 'Ubuntu 16.04'
+      timeoutInMinutes: 600
     steps:
     - task: AzureCLI@1
       displayName: 'Enable resource locks'
