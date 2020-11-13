@@ -1,0 +1,27 @@
+# Docs:
+# https://aka.ms/yaml
+
+trigger:
+    batch: true
+    branches:
+      include:
+      - master
+  
+ 
+  stages:
+    - stage: CI
+       parameters:
+         serviceConnection: ''
+       jobs:
+        - job: Resource_locks
+          pool:
+            vmImage: 'Ubuntu 16.04'
+          timeoutInMinutes: 600
+          steps:
+          - task: AzureCLI@1
+            displayName: 'Enable resource locks'
+            inputs:
+              scriptType: bash
+              azureSubscription: ${{ parameters.serviceConnection }}
+              scriptLocation: scriptPath
+              scriptPath: scripts/apply-resource-locking.sh
