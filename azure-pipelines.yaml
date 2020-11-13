@@ -5,6 +5,9 @@ trigger:
   branches:
     include:
       - master
+
+variables:
+  azureSubscription: DCD-CFTAPPS-SBOX
   
  
 stages :
@@ -20,4 +23,5 @@ stages :
       inputs:
         scriptType: bash
         scriptLocation: scriptPath
+        azureSubscription: '$(azureSubscription)'
         scriptPath: scripts/apply-resource-locking.sh

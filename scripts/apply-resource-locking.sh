@@ -1,9 +1,8 @@
 #!/bin/bash
 set -e
-SUBS=$1
 
 echo "retrieve all resource groups in a subscription"
-RESOURCE_GROUPS=$(az group list --subscription=$SUBS | jq '.[].name')
+RESOURCE_GROUPS=$(az group list | jq '.[].name')
 
 for rg in ${RESOURCE_GROUPS[@]}; 
 do
