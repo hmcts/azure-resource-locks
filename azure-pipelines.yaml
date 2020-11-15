@@ -7,7 +7,7 @@ trigger:
       - master
 
 variables:
-  azureSubscription: dcd_sp_ado_sbox_operations_v2
+  azureSubscription: DCD-CFTAPPS-DEV
   
  
 stages :
