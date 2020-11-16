@@ -24,4 +24,4 @@ stages :
         scriptType: bash
         scriptLocation: scriptPath
         azureSubscription: '$(azureSubscription)'
-        scriptPath: scripts/apply-resource-locking.sh
+        scriptPath: scripts/enable-resource-locking.sh
