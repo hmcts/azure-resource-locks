@@ -7,7 +7,7 @@ trigger:
       - master
 
 variables:
-  azureSubscription: DCD-CFTAPPS-DEV
+  azureSubscription: OPS-APPROVAL-GATE-SBOX-ENVS
   
  
 stages :
