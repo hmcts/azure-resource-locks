@@ -18,7 +18,7 @@ stages :
       vmImage: 'Ubuntu 16.04'
       timeoutInMinutes: 600
     steps:
-    - task: AzureCLI@1
+    - task: AzureCLI@2
       displayName: 'Enable resource locks'
       inputs:
         scriptType: bash
