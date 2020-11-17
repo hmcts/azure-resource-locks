@@ -11,7 +11,9 @@ do
   RG_NAME=$(sed -e 's/^"//' -e 's/"$//' <<<"$rg")
   RSRC_LIST=$(az resource list -g $RG_NAME --subscription DCD-CFTAPPS-SBOX | jq '.[].type' | sed -e 's/^"//' -e 's/"$//' | grep -ciE 'Storage|KeyVault|Sql')
   echo "Total no of resources matched: $RSRC_LIST"
-  echo "retrieving locks for each resource group in the subscription: "
+
+
+  echo "retrieving locks for each resource group:"
   locks=$(az lock list -g $RG_NAME -o tsv)
 
   echo "Checking if no locks exist for the resource group: $RG_NAME then assign cannot delete lock"
