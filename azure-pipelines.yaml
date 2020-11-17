@@ -9,7 +9,6 @@ trigger:
 pr: none
 
 variables:
-  azureSubscription: OPS-APPROVAL-GATE-SBOX-ENVS
   
  
 stages :
