@@ -7,9 +7,6 @@ trigger:
       - master
 # Don't run against PRs
 pr: none
-
-variables:
-  
  
 stages :
 - stage: CI
