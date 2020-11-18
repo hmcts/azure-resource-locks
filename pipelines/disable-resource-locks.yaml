@@ -9,19 +9,18 @@ trigger:
 pr: none
 
 variables:
-  azureSubscription: OPS-APPROVAL-GATE-SBOX-ENVS
   
  
 stages :
 - stage: CI
   jobs:
-  - job: Resource_locks
+  - job: Disable_Resource_locks
     pool:
       vmImage: 'Ubuntu 16.04'
       timeoutInMinutes: 600
     steps:
     - task: AzureCLI@2
-      displayName: 'Enable resource locks'
+      displayName: 'Disable resource locks'
       inputs:
         scriptType: bash
         scriptLocation: scriptPath

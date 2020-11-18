@@ -14,7 +14,7 @@ variables:
 stages :
 - stage: CI
   jobs:
-  - job: Resource_locks
+  - job: Enable_Resource_locks
     pool:
       vmImage: 'Ubuntu 16.04'
       timeoutInMinutes: 600
