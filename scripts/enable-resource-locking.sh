@@ -7,7 +7,7 @@ echo "retrieve all resource groups in a subscription"
 RG_LIST=$(az resource list --query "${JSONPATH}"  -o tsv | sort -u)
 
 
-for rg in ${RESOURCE_GROUPS[@]}
+for rg in ${RG_LIST[@]}
 do
   RG_NAME=$(sed -e 's/^"//' -e 's/"$//' <<<"$rg")
 
