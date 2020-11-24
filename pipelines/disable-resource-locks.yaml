@@ -4,16 +4,16 @@ trigger: none
 # Don't run against PRs
 pr: none
  
-stages:
-  jobs:
-    - job: Disable_Resource_locks
-      pool:
-        vmImage: 'Ubuntu 16.04'
-      steps:
-      - task: AzureCLI@2
-        displayName: 'Disable resource locks'
-        inputs:
-          scriptType: bash
-          scriptLocation: scriptPath
-          azureSubscription: '$(azureSubscription)'
-          scriptPath: scripts/disable-resource-locking.sh
+
+jobs:
+  - job: Disable_Resource_locks
+    pool:
+      vmImage: 'Ubuntu 16.04'
+    steps:
+    - task: AzureCLI@2
+      displayName: 'Disable resource locks'
+      inputs:
+        scriptType: bash
+        scriptLocation: scriptPath
+        azureSubscription: '$(azureSubscription)'
+        scriptPath: scripts/disable-resource-locking.sh
