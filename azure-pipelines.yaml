@@ -6,13 +6,13 @@ pr: none
  
 
 jobs:
-    - job: Enable_Resource_locks
-      pool:
-        vmImage: 'Ubuntu 16.04'
-      steps:
-      - task: AzureCLI@2
-        displayName: 'Enable resource locks'
-        inputs:
+  - job: Enable_Resource_locks
+    pool:
+      vmImage: 'Ubuntu 16.04'
+    steps:
+    - task: AzureCLI@2
+      displayName: 'Enable resource locks'
+      inputs:
         scriptType: bash
         scriptLocation: scriptPath
         azureSubscription: '$(azureSubscription)'
