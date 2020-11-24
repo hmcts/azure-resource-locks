@@ -1,6 +1,6 @@
 # Docs:
 # https://aka.ms/yaml
-trigger:
+trigger: none
 # Don't run against PRs
 pr: none
  
