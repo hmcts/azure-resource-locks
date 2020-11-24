@@ -17,6 +17,6 @@ do
 
   if [[ -z "$locks" && $locks==" " ]]; then
     echo "creating locks for resource group: $RG_NAME as they don't exist"
-    az lock create --name SboxLockGroup --lock-type CanNotDelete --resource-group $RG_NAME
+    az lock create --name ProdLockGroup --lock-type CanNotDelete --resource-group $RG_NAME
   fi
 done

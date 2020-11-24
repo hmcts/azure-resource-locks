@@ -1,20 +1,14 @@
 # Docs:
 # https://aka.ms/yaml
 trigger:
-  batch: true
-  branches:
-    include:
-      - master
 # Don't run against PRs
 pr: none
  
-stages :
-- stage: CI
-  jobs:
+
+jobs:
   - job: Enable_Resource_locks
     pool:
       vmImage: 'Ubuntu 16.04'
-      timeoutInMinutes: 600
     steps:
     - task: AzureCLI@2
       displayName: 'Enable resource locks'
