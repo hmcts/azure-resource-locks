@@ -12,13 +12,13 @@ do
   locks=$(az group lock list -g $rg -o json | jq '.[].name')
 
   echo "locks: ${locks}"
-  echo "Checking if locks exist for the resource group: $RG_NAME then disable locks"
+  echo "Checking if locks exist for the resource group: $rg then disable locks"
   if [ ! -z "$locks" -a $locks != " " ]; then
-    echo "disable lock for resource group: $RG_NAME"
+    echo "disable lock for resource group: $rg"
     for rg_lock in ${locks[@]};
     do
       lock=$(sed -e 's/^"//' -e 's/"$//' <<<"$rg_lock")
-      az lock delete --name $lock --resource-group $RG_NAME
+      az lock delete --name $lock --resource-group $rg
     done
   fi
 done
