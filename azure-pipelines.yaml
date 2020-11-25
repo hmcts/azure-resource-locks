@@ -1,0 +1,19 @@
+# Docs:
+# https://aka.ms/yaml
+trigger: none
+# Don't run against PRs
+pr: none
+ 
+
+jobs:
+  - job: Enable_Resource_locks
+    pool:
+      vmImage: 'Ubuntu 16.04'
+    steps:
+    - task: AzureCLI@2
+      displayName: 'Enable resource locks'
+      inputs:
+        scriptType: bash
+        scriptLocation: scriptPath
+        azureSubscription: '$(azureSubscription)'
+        scriptPath: scripts/enable-resource-locking.sh
