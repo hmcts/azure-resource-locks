@@ -1,17 +1,15 @@
 #!/bin/bash
 set -e
 
-SUBS=$1
+JSONPATH="[?(contains(type, 'Storage') || contains(type, 'KeyVault') || contains(type, 'SQL') || contains(type, 'Insights')) ].[resourceGroup]"
 
 echo "retrieve all resource groups in a subscription"
-RESOURCE_GROUPS=$(az group list | jq '.[].name')
+RG_LIST=$(az resource list --query "${JSONPATH}"  -o tsv | sort -u)
 
-for rg in ${RESOURCE_GROUPS[@]}; 
+for rg in ${RG_LIST[@]}; 
 do
-  RG_NAME=$(sed -e 's/^"//' -e 's/"$//' <<<"$rg")
-
   echo "retrieving locks for each resource group"
-  locks=$(az group lock list -g ${RG_NAME} -o json | jq '.[].name')
+  locks=$(az group lock list -g $rg -o json | jq '.[].name')
 
   echo "locks: ${locks}"
   echo "Checking if locks exist for the resource group: $RG_NAME then disable locks"
