@@ -20,4 +20,4 @@ jobs:
         scriptLocation: scriptPath
         azureSubscription: '$(azureSubscription)'
         scriptPath: scripts/enable-resource-locking.sh
-    condition: eq('${{ variables.enableLocks }}', true)
+    condition: eq(variables.enableLocks, true)
