@@ -4,10 +4,6 @@ trigger: none
 # Don't run against PRs
 pr: none
 
-variables:
-    - name: enableLocks
-      value: '$(enableLocks)'
-
 jobs:
   - job: Enable_Resource_locks
     pool:
@@ -20,4 +16,4 @@ jobs:
         scriptLocation: scriptPath
         azureSubscription: '$(azureSubscription)'
         scriptPath: scripts/enable-resource-locking.sh
-    condition: eq(variables.enableLocks, true)
+    condition: eq($(enableLocks), true)
