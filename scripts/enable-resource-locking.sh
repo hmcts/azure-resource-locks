@@ -13,13 +13,11 @@ do
   locks=$(az lock list -g $rg -o tsv)
   
   subname=$(az account show | jq .name)
-  echo "sub: $subname"
   if [[ $subname == *"STG"* ]]
   then
     lockname="stg-lock"
   else
     lockname="prod-lock"
-  echo $lockname
   fi
 
   if [[ -z "$locks" && $locks==" " ]]; then
