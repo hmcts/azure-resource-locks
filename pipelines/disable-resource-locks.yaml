@@ -17,3 +17,4 @@ jobs:
         scriptLocation: scriptPath
         azureSubscription: '$(azureSubscription)'
         scriptPath: scripts/disable-resource-locking.sh
+        arguments: '$(resource-groups-list)'

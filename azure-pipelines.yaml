@@ -13,12 +13,12 @@ schedules:
       always: true
 
 jobs:
-  - job: Resource_locks
+  - job: Enable_Resource_Locks
     pool:
       vmImage: 'Ubuntu 16.04'
     steps:
     - task: AzureCLI@2
-      displayName: 'Resource locks'
+      displayName: 'Enable Resource locks'
       inputs:
         scriptType: bash
         scriptLocation: scriptPath
