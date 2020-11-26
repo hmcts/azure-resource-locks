@@ -16,4 +16,3 @@ jobs:
         scriptLocation: scriptPath
         azureSubscription: '$(azureSubscription)'
         scriptPath: scripts/enable-resource-locking.sh
-    condition: eq($(enableLocks), true)
