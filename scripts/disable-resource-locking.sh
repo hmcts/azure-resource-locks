@@ -1,37 +1,28 @@
 #!/bin/bash
 set -e
 
-RESOURCETYPES_LIST=$1
+RESOURCE_GROUPS_LIST=$1
 
-if [ -z "${RESOURCETYPES_LIST}" ]; then
-    echo "ResourceTypes list is empty, aborting"
+if [ -z "${RESOURCE_GROUPS_LIST}" ]; then
+    echo "Resource Groups list is empty, aborting"
     exit 1
 fi
 
-IFS=', ' read -r -a RESOURCETYPES_ARRAY <<< "$RESOURCETYPES_LIST"
-echo "Array : $RESOURCETYPES_ARRAY"
-for RESOURCETYPE in "${RESOURCETYPES_ARRAY[@]}"
+IFS=', ' read -r -a RESOURCE_GROUPS_ARRAY <<< "$RESOURCE_GROUPS_LIST"
+for RG in "${RESOURCE_GROUPS_ARRAY[@]}"
 do
-    
-  JSONPATH="[?(contains(type, '$RESOURCETYPE').[resourceGroup]"
 
-  echo "retrieve all resource groups in a subscription"
-  RG_LIST=$(az resource list --query "${JSONPATH}"  -o tsv | sort -u)
+  echo "retrieving locks for each resource group"
+  LOCKS=$(az group lock list -g $RG -o json | jq '.[].name')
 
-  for rg in ${RG_LIST[@]}; 
-  do
-    echo "retrieving locks for each resource group"
-    locks=$(az group lock list -g $rg -o json | jq '.[].name')
-
-    echo "locks: ${locks}"
-    echo "Checking if locks exist for the resource group: $rg then disable locks"
-    if [ ! -z "$locks" -a $locks != " " ]; then
-      echo "disable lock for resource group: $rg"
-      for rg_lock in ${locks[@]};
-      do
-        lock=$(sed -e 's/^"//' -e 's/"$//' <<<"$rg_lock")
-        az lock delete --name $lock --resource-group $rg
-      done
-    fi
-  done
+  echo "Checking if LOCKS exist for the resource group: $RG then disable locks"
+  if [ ! -z "$LOCKS" -a $LOCKS != " " ]; then
+    echo "disable lock for resource group: $RG"
+    for RG_LOCK in ${LOCKS[@]};
+    do
+      LOCK=$(sed -e 's/^"//' -e 's/"$//' <<<"$RG_LOCK")
+      az lock delete --name $LOCK --resource-group $RG
+    done
+  fi
+  
 done
