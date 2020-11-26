@@ -4,16 +4,23 @@ trigger: none
 # Don't run against PRs
 pr: none
 
+schedules:
+    - cron: "* * 0/3 ? * * *"
+      displayName: For Every 3 hours
+      branches:
+        include:
+        - master
+      always: true
+
 jobs:
-  - job: Enable_Resource_locks
+  - job: Resource_locks
     pool:
       vmImage: 'Ubuntu 16.04'
     steps:
     - task: AzureCLI@2
-      displayName: 'Enable resource locks'
+      displayName: 'Resource locks'
       inputs:
         scriptType: bash
         scriptLocation: scriptPath
         azureSubscription: '$(azureSubscription)'
         scriptPath: scripts/enable-resource-locking.sh
-    condition: eq($(enableLocks), true)
