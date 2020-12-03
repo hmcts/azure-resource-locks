@@ -29,6 +29,3 @@ The disable resource locks pipeline needs running manually by  specifying the co
 
     Resource groups list to provided:
     ![Alt text](/img/resource-groups-list.png?raw=true "Resource groups list")
-
-
-**Steps to disable the locks**
