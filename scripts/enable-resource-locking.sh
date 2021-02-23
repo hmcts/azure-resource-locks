@@ -9,7 +9,7 @@ RG_LIST=$(az resource list --query "${JSONPATH}"  -o tsv | sort -u)
 
 for rg in ${RG_LIST[@]}
 do
-  echo "retrieving locks for each resource group:"
+  echo "retrieving locks for resource group: $rg"
   locks=$(az lock list -g $rg -o tsv)
   
   subname=$(az account show | jq .name)
