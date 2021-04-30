@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-JSONPATH="[?(contains(type, 'Storage') && tags.\"databricks-environment\" != 'true' || contains(type, 'KeyVault') || contains(type, 'SQL') || contains(type, 'Insights') || contains(type, 'ManagedIdentity'))].[resourceGroup]"
+JSONPATH="[?(contains(type, 'Storage') && tags.\"databricks-environment\" != 'true' || contains(type, 'KeyVault') || contains(type, 'SQL') || contains(type, 'Insights') )].[resourceGroup]"
 
 echo "retrieve all resource groups in a subscription"
 RG_LIST=$(az resource list --query "${JSONPATH}"  -o tsv | sort -u)
