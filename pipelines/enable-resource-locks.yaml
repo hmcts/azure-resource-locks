@@ -15,7 +15,7 @@ schedules:
 jobs:
   - job: Enable_Resource_Locks
     pool:
-      vmImage: 'Ubuntu 16.04'
+      vmImage: 'ubuntu-latest'
     steps:
     - task: AzureCLI@2
       displayName: 'Enable Resource locks'
