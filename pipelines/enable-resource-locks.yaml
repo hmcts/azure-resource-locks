@@ -14,16 +14,12 @@ schedules:
 
 parameters:
   - name: subscriptions
-    type: object
-    default:
-    - subscription: 'DCD-CNP-PROD'
-      service_connection: 'azurerm-prod'
-    - subscription: 'DCD-CNP-DEV'
-      service_connection: 'azurerm-nonprod'
-    - subscription: 'DTS-SHAREDSERVICES-STG'
-      service_connection: 'DTS-SHAREDSERVICES-STG'
-    - subscription: 'DTS-SHAREDSERVICES-PROD'
-      service_connection: 'DTS-SHAREDSERVICES-PROD'
+    type: string
+    values:
+    - 'DCD-CNP-PROD'
+    - 'DCD-CNP-DEV'
+    - 'DTS-SHAREDSERVICES-STG'
+    - 'DTS-SHAREDSERVICES-PROD'
 
 variables:
   - name: DCD-CNP-PROD
