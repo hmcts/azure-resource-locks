@@ -6,16 +6,22 @@ pr: none
  
 parameters:
   - name: subscriptions
-    type: object
-    default:
-    - subscription: 'DCD-CNP-PROD'
-      value: 'azurerm-prod'
-#    - DCD-CNP-DEV:
-#      value: 'azurerm-nonprod'
-#    - DTS-SHAREDSERVICES-STG:
-#      value: 'DTS-SHAREDSERVICES-STG'
-#    - DTS-SHAREDSERVICES-PROD:
-#      value: 'DTS-SHAREDSERVICES-PROD'
+    type: string
+    values:
+    - 'DCD-CNP-PROD'
+    - 'DCD-CNP-DEV'
+    - 'DTS-SHAREDSERVICES-STG'
+    - 'DTS-SHAREDSERVICES-PROD'
+
+variables:
+  - name: DCD-CNP-PROD
+    value: 'azurerm-prod'
+  - name: DCD-CNP-DEV
+    value: 'azurerm-nonprod'
+  - name: DTS-SHAREDSERVICES-STG
+    value: 'DTS-SHAREDSERVICES-STG'
+  - name: DTS-SHAREDSERVICES-PROD
+    value: 'DTS-SHAREDSERVICES-PROD'
 
 jobs:
   - job: Disable_Resource_locks
@@ -27,6 +33,6 @@ jobs:
       inputs:
         scriptType: bash
         scriptLocation: scriptPath
-        azureSubscription: ${{ parameters.subscription }}
+        azureSubscription: $(${{ parameters.subscription }})
         scriptPath: scripts/disable-resource-locking.sh
         arguments: '$(resource-groups-list)'

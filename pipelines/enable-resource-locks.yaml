@@ -14,32 +14,27 @@ schedules:
 
 parameters:
   - name: subscriptions
-    type: string
-    values:
-    - 'DCD-CNP-PROD'
-    - 'DCD-CNP-DEV'
-    - 'DTS-SHAREDSERVICES-STG'
-    - 'DTS-SHAREDSERVICES-PROD'
-
-variables:
-  - name: DCD-CNP-PROD
-    value: 'azurerm-prod'
-  - name: DCD-CNP-DEV
-    value: 'azurerm-nonprod'
-  - name: DTS-SHAREDSERVICES-STG
-    value: 'DTS-SHAREDSERVICES-STG'
-  - name: DTS-SHAREDSERVICES-PROD
-    value: 'DTS-SHAREDSERVICES-PROD'
+    type: object
+    default:
+    - subscription: 'DCD-CNP-PROD'
+      service_connection: 'azurerm-prod'
+    - subscription: 'DCD-CNP-DEV'
+      service_connection: 'azurerm-nonprod'
+    - subscription: 'DTS-SHAREDSERVICES-STG'
+      service_connection: 'DTS-SHAREDSERVICES-STG'
+    - subscription: 'DTS-SHAREDSERVICES-PROD'
+      service_connection: 'DTS-SHAREDSERVICES-PROD'
 
 jobs:
-  - job: Enable_Resource_Locks
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:
-    - task: AzureCLI@2
-      displayName: 'Enable Resource locks'
-      inputs:
-        scriptType: bash
-        scriptLocation: scriptPath
-        azureSubscription: $(${{ parameters.subscription }})
-        scriptPath: scripts/enable-resource-locking.sh
+  - ${{ each subscription in parameters.subscriptions }}:
+    - job: Enable_Resource_Locks
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
+      - task: AzureCLI@2
+        displayName: 'Enable Resource locks'
+        inputs:
+          scriptType: bash
+          scriptLocation: scriptPath
+          azureSubscription: ${{ subscription.service_connection }}
+          scriptPath: scripts/enable-resource-locking.sh
