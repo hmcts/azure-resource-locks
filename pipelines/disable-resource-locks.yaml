@@ -5,29 +5,25 @@ trigger: none
 pr: none
  
 parameters:
-  - name: subscriptions
-    type: object
-    default:
-    - subscription: 'DCD-CNP-PROD'
-      service_connection: 'azurerm-prod'
-    - subscription: 'DCD-CNP-DEV'
-      service_connection: 'azurerm-nonprod'
-    - subscription: 'DTS-SHAREDSERVICES-STG'
-      service_connection: 'DTS-SHAREDSERVICES-STG'
-    - subscription: 'DTS-SHAREDSERVICES-PROD'
-      service_connection: 'DTS-SHAREDSERVICES-PROD'
+  - subscription: 'DCD-CNP-PROD'
+    service_connection: 'azurerm-prod'
+  - subscription: 'DCD-CNP-DEV'
+    service_connection: 'azurerm-nonprod'
+  - subscription: 'DTS-SHAREDSERVICES-STG'
+    service_connection: 'DTS-SHAREDSERVICES-STG'
+  - subscription: 'DTS-SHAREDSERVICES-PROD'
+    service_connection: 'DTS-SHAREDSERVICES-PROD'
 
 jobs:
-  - ${{ each subscription in parameters.subscriptions }}:
-    - job: Disable_Resource_locks
-      pool:
-        vmImage: 'ubuntu-latest'
-      steps:
-      - task: AzureCLI@2
-        displayName: 'Disable resource locks'
-        inputs:
-          scriptType: bash
-          scriptLocation: scriptPath
-          azureSubscription: ${{ subscription.service_connection }}
-          scriptPath: scripts/disable-resource-locking.sh
-          arguments: '$(resource-groups-list)'
+  - job: Disable_Resource_locks
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: AzureCLI@2
+      displayName: 'Disable resource locks'
+      inputs:
+        scriptType: bash
+        scriptLocation: scriptPath
+        azureSubscription: ${{ parameters.subscription.service_connection }}
+        scriptPath: scripts/disable-resource-locking.sh
+        arguments: '$(resource-groups-list)'
