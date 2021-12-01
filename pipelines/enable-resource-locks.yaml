@@ -16,25 +16,31 @@ parameters:
   - name: subscriptions
     type: object
     default:
-    - subscription: 'DCD-CNP-PROD'
-      service_connection: 'azurerm-prod'
-    - subscription: 'DCD-CNP-DEV'
-      service_connection: 'azurerm-nonprod'
-    - subscription: 'DTS-SHAREDSERVICES-STG'
-      service_connection: 'DTS-SHAREDSERVICES-STG'
-    - subscription: 'DTS-SHAREDSERVICES-PROD'
-      service_connection: 'DTS-SHAREDSERVICES-PROD'
+    - stageName: 'CNP_Dev'
+      subscription: 'DCD-CNP-DEV'
+      serviceConnection: 'azurerm-nonprod'
+    - stageName: 'CNP_PROD'
+      subscription: 'DCD-CNP-PROD'
+      serviceConnection: 'azurerm-prod'
+    - stageName: 'SDS_STG'
+      subscription: 'DTS-SHAREDSERVICES-STG'
+      serviceConnection: 'DTS-SHAREDSERVICES-STG'
+    - stageName: 'SDS_PROD'
+      subscription: 'DTS-SHAREDSERVICES-PROD'
+      serviceConnection: 'DTS-SHAREDSERVICES-PROD'
 
-jobs:
-  - ${{ each subscription in parameters.subscriptions }}:
-    - job: Enable_Resource_Locks
-      pool:
-        vmImage: 'ubuntu-latest'
-      steps:
-      - task: AzureCLI@2
-        displayName: 'Enable Resource locks'
-        inputs:
-          scriptType: bash
-          scriptLocation: scriptPath
-          azureSubscription: ${{ subscription.service_connection }}
-          scriptPath: scripts/enable-resource-locking.sh
+stages:
+  - ${{ each stageName in parameters.subscriptions }}:
+    - stage: ${{ stageName.stageName }}
+      jobs:
+      - job: Enable_Resource_Locks
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+        - task: AzureCLI@2
+          displayName: 'Enable Resource locks'
+          inputs:
+            scriptType: bash
+            scriptLocation: scriptPath
+            azureSubscription: ${{ stageName.serviceConnection }}
+            scriptPath: scripts/enable-resource-locking.sh
