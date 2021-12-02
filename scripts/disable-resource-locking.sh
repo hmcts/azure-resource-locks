@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-RESOURCE_GROUPS_LIST=$1
+#RESOURCE_GROUPS_LIST=$1
 
 if [ -z "${RESOURCE_GROUPS_LIST}" ]; then
     echo "Resource Groups list is empty, aborting"

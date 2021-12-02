@@ -12,6 +12,8 @@ parameters:
     - 'DCD-CNP-DEV'
     - 'DTS-SHAREDSERVICES-STG'
     - 'DTS-SHAREDSERVICES-PROD'
+  - name: resourceGroup
+    type: string
 
 variables:
   - name: DCD-CNP-PROD
@@ -35,4 +37,5 @@ jobs:
         scriptLocation: scriptPath
         azureSubscription: $(${{ parameters.subscriptions }})
         scriptPath: scripts/disable-resource-locking.sh
-        arguments: '$(resource-groups-list)'
+      env:
+       rg: ${{ parameters.resourceGroup }}
