@@ -33,6 +33,6 @@ jobs:
       inputs:
         scriptType: bash
         scriptLocation: scriptPath
-        azureSubscription: $(${{ parameters.subscription }})
+        azureSubscription: $(${{ parameters.subscriptions }})
         scriptPath: scripts/disable-resource-locking.sh
         arguments: '$(resource-groups-list)'
