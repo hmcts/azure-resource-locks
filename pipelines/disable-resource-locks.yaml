@@ -5,7 +5,8 @@ trigger: none
 pr: none
  
 parameters:
-  - name: subscriptions
+  - name: subscription
+    displayName: Subscription
     type: string
     values:
     - 'DCD-CNP-PROD'
@@ -38,4 +39,4 @@ jobs:
         azureSubscription: $(${{ parameters.subscriptions }})
         scriptPath: scripts/disable-resource-locking.sh
       env:
-       rg: ${{ parameters.resourceGroup }}
+       RESOURCE_GROUPS_LIST: ${{ parameters.resourceGroup }}
