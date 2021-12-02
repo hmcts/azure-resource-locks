@@ -20,4 +20,4 @@ Each pipeline has been configured to use the appropriate service connection auto
 The disable resource locks pipeline must be run manually by selecting the name of a subscription from the dropdown and entering a list of resource groups to be targeted via the *resource-groups-list* pipeline variable.
 * On the [Disable-resource-locks](https://dev.azure.com/hmcts/CNP/_build?definitionId=423) build definition click *Run pipeline*
 * Select the subscription to target from the dropdown list
-* Enter a comma-delimited list of resource group names for the *resource-groups-list* variable by clicking on variables under *Advanced Options*
+* Enter the name of the resource group to be targeted in the *resourceGroup* parameter or enter a comma delimited list to target multiple resource groups
