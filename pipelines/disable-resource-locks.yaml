@@ -1,4 +1,4 @@
-name: azure-resource-locks - disable
+name: "azure-resource-locks - disable"
 
 # Docs:
 # https://aka.ms/yaml
