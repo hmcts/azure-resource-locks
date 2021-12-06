@@ -1,9 +1,10 @@
+name: azure-resource-locks - enable
+
 # Docs:
 # https://aka.ms/yaml
 trigger: none
 # Don't run against PRs
 pr: none
-name: azure-resource-locks - enable
 
 schedules:
     - cron: "0 */3 * * *"
