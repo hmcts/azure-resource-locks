@@ -12,35 +12,29 @@ schedules:
         - master
       always: true
 
-parameters:
-  - name: subscriptions
-    type: object
-    default:
-    - stageName: 'CNP_Dev'
-      subscription: 'DCD-CNP-DEV'
-      serviceConnection: 'azurerm-nonprod'
-    - stageName: 'CNP_PROD'
-      subscription: 'DCD-CNP-PROD'
-      serviceConnection: 'azurerm-prod'
-    - stageName: 'SDS_STG'
-      subscription: 'DTS-SHAREDSERVICES-STG'
-      serviceConnection: 'DTS-SHAREDSERVICES-STG'
-    - stageName: 'SDS_PROD'
-      subscription: 'DTS-SHAREDSERVICES-PROD'
-      serviceConnection: 'DTS-SHAREDSERVICES-PROD'
-
 stages:
-  - ${{ each stageName in parameters.subscriptions }}:
-    - stage: ${{ stageName.stageName }}
-      jobs:
-      - job: Enable_Resource_Locks
-        pool:
-          vmImage: 'ubuntu-latest'
-        steps:
-        - task: AzureCLI@2
-          displayName: 'Enable Resource locks'
-          inputs:
-            scriptType: bash
-            scriptLocation: scriptPath
-            azureSubscription: ${{ stageName.serviceConnection }}
-            scriptPath: scripts/enable-resource-locking.sh
+  - stage: Enable_locks
+    displayName: Enable locks
+    pool: 
+      vmImage: ubuntu-latest
+    jobs:
+    - job: SDS_Prod
+      steps:
+      - template: run-enable-locks.yaml
+        parameters:
+          service_connection: DTS-SHAREDSERVICES-PROD
+    - job: SDS_STG
+      steps:
+      - template: run-enable-locks.yaml
+        parameters:
+          service_connection: DTS-SHAREDSERVICES-STG
+    - job: CNP_PROD
+      steps:
+      - template: run-enable-locks.yaml
+        parameters:
+          service_connection: azurerm-prod
+    - job: CNP_Dev
+      steps:
+      - template: run-enable-locks.yaml
+        parameters:
+          service_connection: azurerm-nonprod
