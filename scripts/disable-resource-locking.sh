@@ -1,7 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
-
-RESOURCE_GROUPS_LIST=$1
 
 if [ -z "${RESOURCE_GROUPS_LIST}" ]; then
     echo "Resource Groups list is empty, aborting"
@@ -12,12 +10,12 @@ IFS=', ' read -r -a RESOURCE_GROUPS_ARRAY <<< "$RESOURCE_GROUPS_LIST"
 for RG in "${RESOURCE_GROUPS_ARRAY[@]}"
 do
 
-  echo "retrieving locks for each resource group"
-  LOCKS=$(az group lock list -g $RG -o json | jq '.[].name')
+  echo "Retrieving locks for resource group $RG"
+  LOCKS=$(az group lock list --resource-group $RG --query [].name --output tsv)
 
-  echo "Checking if LOCKS exist for the resource group: $RG then disable locks"
-  if [ ! -z "$LOCKS" -a $LOCKS != " " ]; then
-    echo "disable lock for resource group: $RG"
+  echo "Checking if any locks exist for the resource group: $RG"
+  if [ ! -z "$LOCKS" ]; then
+    echo "Disabling lock for resource group: $RG"
     for RG_LOCK in ${LOCKS[@]};
     do
       LOCK=$(sed -e 's/^"//' -e 's/"$//' <<<"$RG_LOCK")

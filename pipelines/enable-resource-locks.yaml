@@ -12,15 +12,29 @@ schedules:
         - master
       always: true
 
-jobs:
-  - job: Enable_Resource_Locks
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:
-    - task: AzureCLI@2
-      displayName: 'Enable Resource locks'
-      inputs:
-        scriptType: bash
-        scriptLocation: scriptPath
-        azureSubscription: '$(azureSubscription)'
-        scriptPath: scripts/enable-resource-locking.sh
+stages:
+  - stage: Enable_locks
+    displayName: Enable locks
+    pool: 
+      vmImage: ubuntu-latest
+    jobs:
+    - job: SDS_Prod
+      steps:
+      - template: run-enable-locks.yaml
+        parameters:
+          service_connection: DTS-SHAREDSERVICES-PROD
+    - job: SDS_STG
+      steps:
+      - template: run-enable-locks.yaml
+        parameters:
+          service_connection: DTS-SHAREDSERVICES-STG
+    - job: CNP_PROD
+      steps:
+      - template: run-enable-locks.yaml
+        parameters:
+          service_connection: azurerm-prod
+    - job: CNP_Dev
+      steps:
+      - template: run-enable-locks.yaml
+        parameters:
+          service_connection: azurerm-nonprod

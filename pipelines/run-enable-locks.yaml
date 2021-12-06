@@ -1,0 +1,8 @@
+steps:
+  - task: AzureCLI@2
+    displayName: 'Enable Resource locks'
+    inputs:
+      scriptType: bash
+      scriptLocation: scriptPath
+      azureSubscription: ${{ parameters.service_connection }}
+      scriptPath: scripts/enable-resource-locking.sh

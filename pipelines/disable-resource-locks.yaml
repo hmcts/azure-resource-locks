@@ -4,6 +4,29 @@ trigger: none
 # Don't run against PRs
 pr: none
  
+parameters:
+  - name: subscription
+    displayName: Subscription
+    type: string
+    default: DCD-CNP-DEV
+    values:
+    - 'DCD-CNP-DEV'
+    - 'DCD-CNP-PROD'
+    - 'DTS-SHAREDSERVICES-STG'
+    - 'DTS-SHAREDSERVICES-PROD'
+  - name: resourceGroup
+    displayName: Resource group
+    type: string
+
+variables:
+  - name: DCD-CNP-PROD
+    value: 'azurerm-prod'
+  - name: DCD-CNP-DEV
+    value: 'azurerm-nonprod'
+  - name: DTS-SHAREDSERVICES-STG
+    value: 'DTS-SHAREDSERVICES-STG'
+  - name: DTS-SHAREDSERVICES-PROD
+    value: 'DTS-SHAREDSERVICES-PROD'
 
 jobs:
   - job: Disable_Resource_locks
@@ -15,6 +38,8 @@ jobs:
       inputs:
         scriptType: bash
         scriptLocation: scriptPath
-        azureSubscription: '$(azureSubscription)'
+        # hack to map subscription name to service connection name
+        azureSubscription: $(${{ parameters.subscription }})
         scriptPath: scripts/disable-resource-locking.sh
-        arguments: '$(resource-groups-list)'
+      env:
+       RESOURCE_GROUPS_LIST: ${{ parameters.resourceGroup }}
