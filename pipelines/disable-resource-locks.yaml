@@ -19,16 +19,6 @@ parameters:
     displayName: Resource group
     type: string
 
-variables:
-  - name: DCD-CNP-PROD
-    value: 'azurerm-prod'
-  - name: DCD-CNP-DEV
-    value: 'azurerm-nonprod'
-  - name: DTS-SHAREDSERVICES-STG
-    value: 'DTS-SHAREDSERVICES-STG'
-  - name: DTS-SHAREDSERVICES-PROD
-    value: 'DTS-SHAREDSERVICES-PROD'
-
 jobs:
   - job: Disable_Resource_locks
     pool:
@@ -40,7 +30,7 @@ jobs:
         scriptType: bash
         scriptLocation: scriptPath
         # hack to map subscription name to service connection name
-        azureSubscription: $(${{ parameters.subscription }})
+        azureSubscription: ${{ parameters.subscription }}
         scriptPath: scripts/disable-resource-locking.sh
       env:
        RESOURCE_GROUPS_LIST: ${{ parameters.resourceGroup }}

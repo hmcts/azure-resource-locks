@@ -33,9 +33,9 @@ stages:
       steps:
       - template: run-enable-locks.yaml
         parameters:
-          service_connection: azurerm-prod
+          service_connection: DCD-CNP-PROD
     - job: CNP_Dev
       steps:
       - template: run-enable-locks.yaml
         parameters:
-          service_connection: azurerm-nonprod
+          service_connection: DCD-CNP-DEV
