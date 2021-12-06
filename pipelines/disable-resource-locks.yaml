@@ -3,6 +3,7 @@
 trigger: none
 # Don't run against PRs
 pr: none
+name: azure-resource-locks - disable
  
 parameters:
   - name: subscription
