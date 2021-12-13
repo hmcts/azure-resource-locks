@@ -12,6 +12,7 @@ do
 
   echo "Retrieving locks for resource group $RG"
   LOCKS=$(az group lock list --resource-group $RG --query [].name --output tsv)
+  az group lock list --resource-group $RG --query "[? contains(id,'/$RG/providers/Microsoft.Authorization')].{name:name}" -o tsv
 
   echo "Checking if any locks exist for the resource group: $RG"
   if [ ! -z "$LOCKS" ]; then
@@ -19,7 +20,8 @@ do
     for RG_LOCK in ${LOCKS[@]};
     do
       LOCK=$(sed -e 's/^"//' -e 's/"$//' <<<"$RG_LOCK")
-      az lock delete --name $LOCK --resource-group $RG
+      echo "Deleting lock $LOCK"
+      az group lock delete --name $LOCK --resource-group $RG
     done
   fi
   
