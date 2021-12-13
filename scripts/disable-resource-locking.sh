@@ -11,8 +11,7 @@ for RG in "${RESOURCE_GROUPS_ARRAY[@]}"
 do
 
   echo "Retrieving locks for resource group $RG"
-  LOCKS=$(az group lock list --resource-group $RG --query [].name --output tsv)
-  az group lock list --resource-group $RG --query "[? contains(id,'/$RG/providers/Microsoft.Authorization')].{name:name}" -o tsv
+  LOCKS=$(az group lock list --resource-group $RG --query "[? contains(id,'/$RG/providers/Microsoft.Authorization')].{name:name}" -o tsv)
 
   echo "Checking if any locks exist for the resource group: $RG"
   if [ ! -z "$LOCKS" ]; then
