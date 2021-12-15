@@ -18,7 +18,7 @@ do
     echo "Disabling lock for resource group: $RG"
     for LOCK in $LOCKS;
     do
-      if grep -q "$RG/providers/Microsoft.Authorization" <<< "$LOCK"
+      if grep -q "/resourceGroups/$RG/providers/Microsoft.Authorization" <<< "$LOCK"
       then
       echo "Deleting resource group level lock $LOCK"
       az group lock delete --ids $LOCK
