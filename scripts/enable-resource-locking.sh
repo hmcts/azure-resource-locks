@@ -9,19 +9,24 @@ RG_LIST=$(az resource list --query "${JSONPATH}"  -o tsv | sort -u)
 
 for rg in ${RG_LIST[@]}
 do
-  echo "retrieving locks for resource group: $rg"
-  locks=$(az lock list -g $rg -o tsv)
-  
-  subname=$(az account show | jq .name)
-  if [[ $subname == *"STG"* ]]
+  if [[ $rg != "pre-stg" or $rg != "pre-prod" ]]
   then
-    lockname="stg-lock"
-  else
-    lockname="prod-lock"
-  fi
+    echo "retrieving locks for resource group: $rg"
+    locks=$(az lock list -g $rg -o tsv)
+    
+    subname=$(az account show | jq .name)
+    if [[ $subname == *"STG"* ]]
+    then
+      lockname="stg-lock"
+    else
+      lockname="prod-lock"
+    fi
 
-  if [[ -z "$locks" && $locks==" " ]]; then
-    echo "creating locks for resource group: $rg they don't exist"
-    az lock create --name $lockname --lock-type CanNotDelete --resource-group $rg
-  fi
+    if [[ -z "$locks" && $locks==" " ]]; then
+      echo "creating locks for resource group: $rg they don't exist"
+      az lock create --name $lockname --lock-type CanNotDelete --resource-group $rg
+    fi
+  else
+    echo "Exempting PRE env from locks"
+ fi
 done
