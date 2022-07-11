@@ -6,11 +6,14 @@ JSONPATH="[?(contains(type, 'Storage') && tags.\"databricks-environment\" != 'tr
 echo "retrieve all resource groups in a subscription"
 RG_LIST=$(az resource list --query "${JSONPATH}"  -o tsv | sort -u)
 
+exclusions=(
+  pre-stg
+  pre-prod
+)
 
 for rg in ${RG_LIST[@]}
 do
-  if [[ $rg != "pre-stg" or $rg != "pre-prod" ]]
-  then
+  [[ "${exclusions[@]}" != "$rg" ]] && continue
     echo "retrieving locks for resource group: $rg"
     locks=$(az lock list -g $rg -o tsv)
     
@@ -26,7 +29,4 @@ do
       echo "creating locks for resource group: $rg they don't exist"
       az lock create --name $lockname --lock-type CanNotDelete --resource-group $rg
     fi
-  else
-    echo "Exempting PRE env from locks"
- fi
 done
