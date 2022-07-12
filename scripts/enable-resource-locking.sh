@@ -13,7 +13,7 @@ exclusions=(
 
 for rg in ${RG_LIST[@]}
 do
-  [[ "${exclusions[@]}" != "$rg" ]] && continue
+   [[ "${exclusions[@]}" =~ "$rg" ]] && echo "skipping $rg as its whitelisted" && continue
     echo "retrieving locks for resource group: $rg"
     locks=$(az lock list -g $rg -o tsv)
     
