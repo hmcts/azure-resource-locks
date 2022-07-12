@@ -6,22 +6,27 @@ JSONPATH="[?(contains(type, 'Storage') && tags.\"databricks-environment\" != 'tr
 echo "retrieve all resource groups in a subscription"
 RG_LIST=$(az resource list --query "${JSONPATH}"  -o tsv | sort -u)
 
+exclusions=(
+  pre-stg #see https://tools.hmcts.net/jira/browse/DTSPO-9316?focusedCommentId=1341646
+  pre-prod
+)
 
 for rg in ${RG_LIST[@]}
 do
-  echo "retrieving locks for resource group: $rg"
-  locks=$(az lock list -g $rg -o tsv)
-  
-  subname=$(az account show | jq .name)
-  if [[ $subname == *"STG"* ]]
-  then
-    lockname="stg-lock"
-  else
-    lockname="prod-lock"
-  fi
+   [[ "${exclusions[@]}" =~ "$rg" ]] && echo "skipping $rg as its whitelisted" && continue
+    echo "retrieving locks for resource group: $rg"
+    locks=$(az lock list -g $rg -o tsv)
+    
+    subname=$(az account show | jq .name)
+    if [[ $subname == *"STG"* ]]
+    then
+      lockname="stg-lock"
+    else
+      lockname="prod-lock"
+    fi
 
-  if [[ -z "$locks" && $locks==" " ]]; then
-    echo "creating locks for resource group: $rg they don't exist"
-    az lock create --name $lockname --lock-type CanNotDelete --resource-group $rg
-  fi
+    if [[ -z "$locks" && $locks==" " ]]; then
+      echo "creating locks for resource group: $rg they don't exist"
+      az lock create --name $lockname --lock-type CanNotDelete --resource-group $rg
+    fi
 done
