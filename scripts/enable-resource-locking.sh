@@ -7,7 +7,7 @@ echo "retrieve all resource groups in a subscription"
 RG_LIST=$(az resource list --query "${JSONPATH}"  -o tsv | sort -u)
 
 exclusions=(
-  pre-stg
+  pre-stg #see https://tools.hmcts.net/jira/browse/DTSPO-9316?focusedCommentId=1341646
   pre-prod
 )
 
