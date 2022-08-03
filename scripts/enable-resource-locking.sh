@@ -1,10 +1,12 @@
 #!/bin/bash
 set -e
 
-JSONPATH="[?(contains(type, 'Storage') && tags.\"databricks-environment\" != 'true' || contains(type, 'KeyVault') || contains(type, 'SQL') || contains(type, 'Insights') )].[resourceGroup]"
+JSONPATH="[?(contains(type, 'Storage') && tags.\"databricks-environment\" != 'true' || contains(type, 'KeyVault') || contains(type, 'SQL') || contains(type, 'Insights') || contains(type, 'azureFirewalls' )].[resourceGroup]"
+JSONPATH2="[?contains(publicIpAllocationMethod, 'Static')].[resourceGroup]"
 
 echo "retrieve all resource groups in a subscription"
-RG_LIST=$(az resource list --query "${JSONPATH}"  -o tsv | sort -u)
+RG_LIST=$(az resource list --query "${JSONPATH}"  -o tsv | sort -u &&
+          az network public-ip list --query "${JSONPATH2}" -o tsv | sort -u )
 
 exclusions=(
   pre-stg #see https://tools.hmcts.net/jira/browse/DTSPO-9316?focusedCommentId=1341646
