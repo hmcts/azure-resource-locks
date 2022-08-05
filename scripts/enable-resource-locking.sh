@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-JSONPATH_ALL="[?(contains(type, 'Storage') && tags.\"databricks-environment\" != 'true' || contains(type, 'KeyVault') || contains(type, 'SQL') || contains(type, 'Insights') || contains(type, 'azureFirewalls') || contains(type, 'resources') || contains(type, 'virtualWans') || contains(type, 'servers') || contains(type, 'databaseAccounts') || contains(type, 'privateDnsZones'))].[resourceGroup]"
-JSONPATH_ALL_PIPS="[?contains(publicIpAllocationMethod, 'Static')].[resourceGroup]"
+JSONPATH_ALL="[?(contains(type, 'Storage') && tags.\"databricks-environment\" != 'true' || contains(type, 'KeyVault') || contains(type, 'SQL') || contains(type, 'Insights') || contains(type, 'azureFirewalls') || contains(type, 'resources') || contains(type, 'virtualWans') || contains(type, 'servers') || contains(type, 'databaseAccounts') || contains(type, 'privateDnsZones')].[resourceGroup]"
+JSONPATH_ALL_PIPS="[(?contains(publicIpAllocationMethod, 'Static'))].[resourceGroup]"
 
 
 echo "retrieve all resource groups in a subscription"
@@ -12,6 +12,11 @@ RG_LIST=$(az resource list --query "${JSONPATH_ALL}"  -o tsv | sort -u &&
 exclusions=(
   pre-stg #see https://tools.hmcts.net/jira/browse/DTSPO-9316?focusedCommentId=1341646
   pre-prod
+  mi-synapse-prod-rg
+  mi-PROD-rg
+  mi-ingestion-prod-rg
+  mi-STG-rg
+  mi-synapse-stg-rg
 )
 
 for rg in ${RG_LIST[@]}
@@ -21,7 +26,7 @@ do
     locks=$(az lock list -g $rg -o tsv)
     
     subname=$(az account show | jq .name)
-    if [[ $subname == *"STG"* ]]
+    if [[ $subname == *"STG"* ]] || [[ $subname == *"NONPROD"* ]]
     then
       lockname="stg-lock"
     else
