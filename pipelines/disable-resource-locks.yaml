@@ -16,6 +16,9 @@ parameters:
     - 'DCD-CNP-PROD'
     - 'DTS-SHAREDSERVICES-STG'
     - 'DTS-SHAREDSERVICES-PROD'
+    - 'HMCTS-HUB-PROD-INTSVC'
+    - 'HMCTS-HUB-NONPROD-INTSVC'
+    - 'DCD-CFTAPPS-PROD'
   - name: resourceGroup
     displayName: Resource group
     type: string
