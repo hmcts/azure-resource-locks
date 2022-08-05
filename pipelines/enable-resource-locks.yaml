@@ -50,3 +50,8 @@ stages:
         - template: run-enable-locks.yaml
           parameters:
             service_connection: HMCTS-HUB-NONPROD-INTSVC
+    - job: DCD_CFT_PROD
+      steps:
+        - template: run-enable-locks.yaml
+          parameters:
+            service_connection: DCD-CFTAPPS-PROD

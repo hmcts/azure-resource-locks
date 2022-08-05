@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-JSONPATH_ALL="[?(contains(type, 'Storage') && tags.\"databricks-environment\" != 'true' || contains(type, 'KeyVault') || contains(type, 'SQL') || contains(type, 'Insights') || contains(type, 'azureFirewalls') || contains(type, ('resources') || contains(type, ('virtualWans') || contains(type, ('servers') || contains(type, ('databaseAccounts'))].[resourceGroup]"
+JSONPATH_ALL="[?(contains(type, 'Storage') && tags.\"databricks-environment\" != 'true' || contains(type, 'KeyVault') || contains(type, 'SQL') || contains(type, 'Insights') || contains(type, 'azureFirewalls') || contains(type, ('resources') || contains(type, ('virtualWans') || contains(type, ('servers') || contains(type, ('databaseAccounts') || contains(type, 'privateDnsZones'))].[resourceGroup]"
 JSONPATH_ALL_PIPS="[?contains(publicIpAllocationMethod, 'Static')].[resourceGroup]"
 
 #comment
@@ -34,5 +34,4 @@ do
     fi
 done
 
-# remove this later
-### az resource list --query "[?(contains(type, 'Storage') && tags.\"databricks-environment\" != 'true' || contains(type, 'KeyVault') || contains(type, 'SQL') || contains(type, 'Insights') || contains(type, 'azureFirewalls') || contains(type, 'resources') || contains(type, 'virtualWans') || contains(type, 'servers') || contains(type, 'databaseAccounts'))].[resourceGroup]" -o tsv | sort -u
+
