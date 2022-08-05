@@ -45,7 +45,7 @@ stages:
         - template: run-enable-locks.yaml
           parameters:
             service_connection: HMCTS-HUB-PROD-INTSVC
-    - job: HUB_STG
+    - job: HUB_NON_PROD
       steps:
         - template: run-enable-locks.yaml
           parameters:
