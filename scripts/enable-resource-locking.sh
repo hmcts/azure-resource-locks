@@ -1,10 +1,10 @@
 #!/bin/bash
 set -e
 
-JSONPATH_ALL="[?(contains(type, 'Storage') && tags.\"databricks-environment\" != 'true' || contains(type, 'KeyVault') || contains(type, 'SQL') || contains(type, 'Insights') || contains(type, 'azureFirewalls') || contains(type, ('resources') || contains(type, ('virtualWans') || contains(type, ('servers') || contains(type, ('databaseAccounts') || contains(type, 'privateDnsZones'))].[resourceGroup]"
+JSONPATH_ALL="[?(contains(type, 'Storage') && tags.\"databricks-environment\" != 'true' || contains(type, 'KeyVault') || contains(type, 'SQL') || contains(type, 'Insights') || contains(type, 'azureFirewalls') || contains(type, 'resources') || contains(type, 'virtualWans') || contains(type, 'servers') || contains(type, 'databaseAccounts') || contains(type, 'privateDnsZones'))].[resourceGroup]"
 JSONPATH_ALL_PIPS="[?contains(publicIpAllocationMethod, 'Static')].[resourceGroup]"
 
-#comment
+
 echo "retrieve all resource groups in a subscription"
 RG_LIST=$(az resource list --query "${JSONPATH_ALL}"  -o tsv | sort -u &&
           az network public-ip list --query "${JSONPATH_ALL_PIPS}" -o tsv | sort -u )
