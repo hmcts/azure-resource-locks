@@ -24,7 +24,15 @@ The list could be extended by adding *|| contains(type, '<<*resource type*>>'))*
 ## Pipeline jobs
 
 - [Enable-resource-locks](https://dev.azure.com/hmcts/PlatformOperations/_build?definitionId=534)
-    - Scheduled to *run every 3 hours* for the *CNP-DEV*, *CNP-Prod*, *SDS-STG,* *SDS-PROD* *HUB-PROD,* *HUB-NONPROD,* and *DCD-CFT-PROD* environments
+
+   Scheduled to *run every 3 hours* for the environments below
+    - *CNP-DEV*
+    - *CNP-Prod*
+    - *SDS-STG* 
+    - *SDS-PROD* 
+    - *HUB-PROD* 
+    - *HUB-NONPROD*
+    - *DCD-CFT-PROD*
 - [Disable-resource-locks](https://dev.azure.com/hmcts/PlatformOperations/_build?definitionId=535)
     - Select the subscription and resource group(s) to run against from the job parameters
 
