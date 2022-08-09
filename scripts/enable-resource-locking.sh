@@ -17,7 +17,6 @@ exclusions=(
   mi-ingestion-prod-rg
   mi-STG-rg
   mi-synapse-stg-rg
-  DefaultResourceGroup-SUK
 )
 
 for rg in ${RG_LIST[@]}
