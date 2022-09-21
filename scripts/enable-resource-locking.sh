@@ -17,6 +17,14 @@ exclusions=(
   mi-ingestion-prod-rg
   mi-STG-rg
   mi-synapse-stg-rg
+  cft-prod-00-aks-node-rg
+  cft-prod-01-aks-node-rg
+  cft-aat-00-aks-node-rg
+  cft-aat-01-aks-node-rg
+  ss-prod-00-aks-node-rg
+  ss-prod-01-aks-node-rg
+  ss-stg-00-aks-node-rg
+  ss-stg-01-aks-node-rg
 )
 
 for rg in ${RG_LIST[@]}
