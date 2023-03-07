@@ -14,6 +14,7 @@ parameters:
     values:
     - 'DCD-CNP-DEV'
     - 'DCD-CNP-PROD'
+    - 'DTS-SHAREDSERVICES-DEV'
     - 'DTS-SHAREDSERVICES-STG'
     - 'DTS-SHAREDSERVICES-PROD'
     - 'HMCTS-HUB-PROD-INTSVC'
