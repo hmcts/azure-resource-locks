@@ -19,6 +19,7 @@ parameters:
     - 'HMCTS-HUB-PROD-INTSVC'
     - 'HMCTS-HUB-NONPROD-INTSVC'
     - 'DCD-CFTAPPS-PROD'
+    - 'Reform-CFT-VH-Dev'
   - name: resourceGroup
     displayName: Resource group
     type: string
