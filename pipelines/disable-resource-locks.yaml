@@ -20,6 +20,7 @@ parameters:
     - 'HMCTS-HUB-NONPROD-INTSVC'
     - 'DCD-CFTAPPS-PROD'
     - 'Reform-CFT-VH-Dev'
+    - 'DCD-CFT-VH-Pilot'
   - name: resourceGroup
     displayName: Resource group
     type: string
