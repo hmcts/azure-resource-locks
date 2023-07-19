@@ -13,6 +13,7 @@ parameters:
     default: DCD-CNP-DEV
     values:
     - 'DCD-CNP-DEV'
+    - 'DCD-CNP-QA'
     - 'DCD-CNP-PROD'
     - 'DTS-SHAREDSERVICES-DEV'
     - 'DTS-SHAREDSERVICES-TEST'
