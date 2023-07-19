@@ -21,6 +21,8 @@ parameters:
     - 'DCD-CFTAPPS-PROD'
     - 'Reform-CFT-VH-Dev'
     - 'DCD-CFT-VH-Pilot'
+    - 'DTS-HERITAGE-EXTSVC-PROD'
+    - 'DTS-HERITAGE-INTSVC-PROD'
   - name: resourceGroup
     displayName: Resource group
     type: string
