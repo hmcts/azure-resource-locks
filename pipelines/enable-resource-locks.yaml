@@ -55,3 +55,13 @@ stages:
         - template: run-enable-locks.yaml
           parameters:
             service_connection: DCD-CFTAPPS-PROD
+    - job: DTS_HERITAGE_EXTSVC_PROD
+      steps:
+        - template: run-enable-locks.yaml
+          parameters:
+            service_connection: DTS-HERITAGE-EXTSVC-PROD
+    - job: DTS_HERITAGE_INTSVC_PROD
+      steps:
+        - template: run-enable-locks.yaml
+          parameters:
+            service_connection: DTS-HERITAGE-INTSVC-PROD
