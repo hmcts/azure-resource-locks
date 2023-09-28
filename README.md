@@ -38,7 +38,7 @@ The list could be extended by adding *|| contains(type, '<<*resource type*>>'))*
 
 ## Exempt from autolocking
 
-- In order to exempt from auto locking resource, you can use below tag on the resource group which will filter out the resource group from being auto locked by Enable-resource-locks pipeline.
+To avoid your resources from being auto locked, you can use the `exemptFromAutoLock` tag  on the resource group:
 ```bash
 exemptFromAutoLock = true
 ```
