@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-JSONPATH_ALL="[?(contains(type, 'Storage') && tags.\"databricks-environment\" != 'true' || tags.\"exemptFromAutoLock\" != 'true' || contains(type, 'KeyVault') || contains(type, 'SQL') || contains(type, 'Insights') || contains(type, 'azureFirewalls') || contains(type, 'resources') || contains(type, 'virtualWans') || contains(type, 'servers') || contains(type, 'databaseAccounts') || contains(type, 'privateDnsZones'))].[resourceGroup]"
+JSONPATH_ALL="[?(contains(type, 'Storage') && tags.\"databricks-environment\" != 'true' || contains(type, 'KeyVault') || contains(type, 'SQL') || contains(type, 'Insights') || contains(type, 'azureFirewalls') || contains(type, 'resources') || contains(type, 'virtualWans') || contains(type, 'servers') || contains(type, 'databaseAccounts') || contains(type, 'privateDnsZones'))].[resourceGroup]"
 JSONPATH_ALL_PIPS="[?contains(publicIpAllocationMethod, 'Static')].[resourceGroup]"
 
 
@@ -32,9 +32,12 @@ exclusions=(
   ss-prod-network-rg
 )
 
+RG_LIST_EXEMPT=$(az group list --query "[?tags.exemptFromAutoLock=='true'].name" -o tsv | sort -u )
+
 for rg in ${RG_LIST[@]}
 do
    [[ "${exclusions[@]}" =~ "$rg" ]] && echo "Skipping $rg as its whitelisted" && continue
+   [[ "${RG_LIST_EXEMPT[@]}" =~ "$rg" ]] && echo "Skipping $rg as it exempt from locking" && continue
     echo "Retrieving locks for resource group: $rg"
     locks=$(az lock list -g $rg -o tsv)
     
