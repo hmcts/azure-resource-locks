@@ -36,3 +36,9 @@ The list could be extended by adding *|| contains(type, '<<*resource type*>>'))*
 - [Disable-resource-locks](https://dev.azure.com/hmcts/PlatformOperations/_build?definitionId=535)
     - Select the subscription and resource group(s) to run against from the job parameters
 
+## Exempt from autolocking
+
+- In order to exempt from auto locking resource, you can use below tag on the resource group which will filter out the resource group from being auto locked by Enable-resource-locks pipeline.
+```bash
+exemptFromAutoLock = true
+```
