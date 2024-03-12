@@ -30,6 +30,7 @@ exclusions=(
   cft-demo-network-rg
   ss-stg-network-rg
   ss-prod-network-rg
+  managed-rg-fxateuu
 )
 
 RG_LIST_EXEMPT=$(az group list --query "[?tags.exemptFromAutoLock=='true'].name" -o tsv | sort -u )
