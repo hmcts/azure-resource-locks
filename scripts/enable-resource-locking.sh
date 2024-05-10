@@ -31,6 +31,7 @@ exclusions=(
   ss-stg-network-rg
   ss-prod-network-rg
   managed-rg-fxateuu
+  bulk-scan-aks-rg
 )
 
 RG_LIST_EXEMPT=$(az group list --query "[?tags.exemptFromAutoLock=='true'].name" -o tsv | sort -u )
