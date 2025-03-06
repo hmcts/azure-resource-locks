@@ -65,3 +65,8 @@ stages:
         - template: run-enable-locks.yaml
           parameters:
             service_connection: DTS-HERITAGE-INTSVC-PROD
+    - job: Strategic_Platform_non_live
+      steps:
+        - template: run-enable-locks.yaml
+          parameters:
+            service_connection: ado_nonlive_workload_identity

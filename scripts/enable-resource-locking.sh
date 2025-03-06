@@ -1,13 +1,15 @@
 #!/bin/bash
 set -e
 
-JSONPATH_ALL="[?((contains(type, 'Storage') && tags.\"databricks-environment\" != 'true') || (contains(type, 'KeyVault') || contains(type, 'SQL') || contains(type, 'Insights') || contains(type, 'azureFirewalls') || contains(type, 'resources') || contains(type, 'virtualWans') || contains(type, 'servers') || contains(type, 'databaseAccounts') || contains(type, 'privateDnsZones')) && (tags."exemptFromAutoLock" != 'true') )].[resourceGroup]"
-JSONPATH_ALL_PIPS="[?contains(publicIpAllocationMethod, 'Static')].[resourceGroup]"
+# JSONPATH_ALL="[?((contains(type, 'Storage') && tags.\"databricks-environment\" != 'true') || (contains(type, 'KeyVault') || contains(type, 'SQL') || contains(type, 'Insights') || contains(type, 'azureFirewalls') || contains(type, 'resources') || contains(type, 'virtualWans') || contains(type, 'servers') || contains(type, 'databaseAccounts') || contains(type, 'privateDnsZones')) && (tags."exemptFromAutoLock" != 'true') )].[resourceGroup]"
+# JSONPATH_ALL_PIPS="[?contains(publicIpAllocationMethod, 'Static')].[resourceGroup]"
 
 
-echo "Retrieve all resource groups in a subscription"
-RG_LIST=$(az resource list --query "${JSONPATH_ALL}"  -o tsv | sort -u &&
-          az network public-ip list --query "${JSONPATH_ALL_PIPS}" -o tsv | sort -u )
+# echo "Retrieve all resource groups in a subscription"
+# RG_LIST=$(az resource list --query "${JSONPATH_ALL}"  -o tsv | sort -u &&
+#           az network public-ip list --query "${JSONPATH_ALL_PIPS}" -o tsv | sort -u )
+
+RG_LIST=("RG-DEV-HELLO-WORLD")
 
 exclusions=(
   pre-stg #see https://tools.hmcts.net/jira/browse/DTSPO-9316?focusedCommentId=1341646
@@ -44,7 +46,7 @@ do
     locks=$(az lock list -g $rg -o tsv)
     
     subname=$(az account show | jq .name)
-    if [[ $subname == *"STG"* ]] || [[ $subname == *"NONPROD"* ]]
+    if [[ $subname == *"STG"* ]] || [[ $subname == *"NONPROD"* ]] || [[ $subname == *"NONLIVE"* ]]
     then
       lockname="stg-lock"
     else
