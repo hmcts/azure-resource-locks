@@ -27,6 +27,7 @@ parameters:
     - 'DCD-CFT-VH-Pilot'
     - 'DTS-HERITAGE-EXTSVC-PROD'
     - 'DTS-HERITAGE-INTSVC-PROD'
+    - 'DTS-HERITAGE-EXTSVC-STG'
   - name: resourceGroup
     displayName: Resource group
     type: string
