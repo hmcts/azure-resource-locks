@@ -10,8 +10,6 @@ RG_LIST=$(az resource list --query "${JSONPATH_ALL}"  -o tsv | sort -u &&
           az network public-ip list --query "${JSONPATH_ALL_PIPS}" -o tsv | sort -u )
 
 exclusions=(
-  pre-stg #see https://tools.hmcts.net/jira/browse/DTSPO-9316?focusedCommentId=1341646
-  pre-prod
   mi-synapse-prod-rg
   mi-PROD-rg
   mi-ingestion-prod-rg
