@@ -65,3 +65,8 @@ stages:
         - template: run-enable-locks.yaml
           parameters:
             service_connection: DTS-HERITAGE-INTSVC-PROD
+    - job: DTS_HERITAGE_EXTSVC_STG
+      steps:
+        - template: run-enable-locks.yaml
+          parameters:
+            service_connection: DTS-HERITAGE-EXTSVC-STG
