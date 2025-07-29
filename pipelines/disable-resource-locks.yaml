@@ -28,6 +28,7 @@ parameters:
     - 'DTS-HERITAGE-EXTSVC-PROD'
     - 'DTS-HERITAGE-INTSVC-PROD'
     - 'DTS-HERITAGE-EXTSVC-STG'
+    - 'DTS-DATAINGEST-PROD'
   - name: resourceGroup
     displayName: Resource group
     type: string

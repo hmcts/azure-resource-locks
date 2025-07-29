@@ -2,7 +2,7 @@
 set -e
 
 JSONPATH_ALL="[?((contains(type, 'Storage') && tags.\"databricks-environment\" != 'true') || (contains(type, 'KeyVault') || contains(type, 'SQL') || contains(type, 'Insights') || contains(type, 'azureFirewalls') || contains(type, 'resources') || contains(type, 'virtualWans') || contains(type, 'servers') || contains(type, 'databaseAccounts') || contains(type, 'privateDnsZones')) && (tags."exemptFromAutoLock" != 'true') )].[resourceGroup]"
-JSONPATH_ALL_PIPS="[?contains(publicIpAllocationMethod, 'Static')].[resourceGroup]"
+JSONPATH_ALL_PIPS="[?contains(publicIPAllocationMethod, 'Static')].[resourceGroup]"
 
 
 echo "Retrieve all resource groups in a subscription"
@@ -30,6 +30,17 @@ exclusions=(
   ss-prod-network-rg
   managed-rg-fxateuu
   baubais-synapse
+  ingest00-product-synapse001
+  ingest01-product-synapse001
+  ingest02-product-synapse001
+  ingest03-product-synapse001
+  ingest04-product-synapse001
+  ingest05-product-synapse001
+  ingest06-product-synapse001
+  ingest07-product-synapse001
+  ingest08-product-synapse001
+  ingest09-product-synapse001
+  ingest10-product-synapse001
 )
 
 RG_LIST_EXEMPT=$(az group list --query "[?tags.exemptFromAutoLock=='true'].name" -o tsv | sort -u )
