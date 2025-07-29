@@ -1,8 +1,8 @@
 #!/bin/bash
-set -ex
+set -e
 
 JSONPATH_ALL="[?((contains(type, 'Storage') && tags.\"databricks-environment\" != 'true') || (contains(type, 'KeyVault') || contains(type, 'SQL') || contains(type, 'Insights') || contains(type, 'azureFirewalls') || contains(type, 'resources') || contains(type, 'virtualWans') || contains(type, 'servers') || contains(type, 'databaseAccounts') || contains(type, 'privateDnsZones')) && (tags."exemptFromAutoLock" != 'true') )].[resourceGroup]"
-JSONPATH_ALL_PIPS="[?contains(publicIpAllocationMethod, 'Static')].[resourceGroup]"
+JSONPATH_ALL_PIPS="[?contains(publicIPAllocationMethod, 'Static')].[resourceGroup]"
 
 
 echo "Retrieve all resource groups in a subscription"
