@@ -84,4 +84,4 @@ stages:
       steps:
         - template: run-enable-locks.yaml
           parameters:
-            service_connection: 'Reform-CFT-Mgmt'
+            service_connection: REFORM-CFT-MGMT
