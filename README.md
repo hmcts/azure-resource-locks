@@ -33,6 +33,7 @@ The list could be extended by adding *|| contains(type, '<<*resource type*>>'))*
     - *HUB-PROD* 
     - *HUB-NONPROD*
     - *DCD-CFT-PROD*
+    - *REFORM-CFT-MGMT*
 - [Disable-resource-locks](https://dev.azure.com/hmcts/PlatformOperations/_build?definitionId=535)
     - Select the subscription and resource group(s) to run against from the job parameters
 
