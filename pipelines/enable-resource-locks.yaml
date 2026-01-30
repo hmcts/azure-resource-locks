@@ -80,3 +80,8 @@ stages:
         - template: run-enable-locks.yaml
           parameters:
             service_connection: 'MOJ DCD Atlassian LVE'
+    - job: Reform-CFT-Mgmt
+      steps:
+        - template: run-enable-locks.yaml
+          parameters:
+            service_connection: 'Reform-CFT-Mgmt'
