@@ -24,6 +24,7 @@ exclusions=(
   ss-stg-00-aks-node-rg
   ss-stg-01-aks-node-rg
   cft-prod-network-rg
+  cft-purview-prod
   cft-aat-network-rg
   cft-demo-network-rg
   ss-stg-network-rg
