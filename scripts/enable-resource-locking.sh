@@ -42,8 +42,8 @@ exclusions=(
   ingest08-product-synapse001
   ingest09-product-synapse001
   ingest10-product-synapse001
-  baubais-synapse-prod
-  baubais-synapse-stg
+  baubais-data-factory-rg-prod
+  baubais-data-factory-rg-stg
 )
 
 RG_LIST_EXEMPT=$(az group list --query "[?tags.exemptFromAutoLock=='true'].name" -o tsv | sort -u )
