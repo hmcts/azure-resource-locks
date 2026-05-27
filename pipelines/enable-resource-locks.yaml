@@ -40,6 +40,11 @@ stages:
       - template: run-enable-locks.yaml
         parameters:
           service_connection: DCD-CNP-DEV
+    - job: CNP_QA
+      steps:
+      - template: run-enable-locks.yaml
+        parameters:
+          service_connection: DCD-CNP-QA
     - job: HUB_PROD
       steps:
         - template: run-enable-locks.yaml
