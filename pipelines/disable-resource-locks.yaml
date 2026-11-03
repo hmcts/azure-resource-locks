@@ -31,6 +31,8 @@ parameters:
     - 'DTS-DATAINGEST-PROD'
     - 'MOJ DCD Atlassian LVE'
     - 'Reform-CFT-Mgmt'
+    - 'DTS-SPS-SBOX'
+    - 'DTS-SPS-STG'
   - name: resourceGroup
     displayName: Resource group
     type: string
