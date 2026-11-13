@@ -10,27 +10,27 @@ parameters:
   - name: subscription
     displayName: Subscription
     type: string
-    default: DCD-CNP-DEV-WIF
+    default: DCD-CNP-DEV
     values:
-    - 'DCD-CNP-DEV-WIF'
-    - 'DCD-CNP-QA-WIF'
-    - 'DCD-CNP-Prod-WIF'
-    - 'DTS-SHAREDSERVICES-DEV-WIF'
-    - 'DTS-SHAREDSERVICES-TEST-WIF'
-    - 'DTS-SHAREDSERVICES-DEMO-WIF'
-    - 'DTS-SHAREDSERVICES-STG-WIF'
-    - 'DTS-SHAREDSERVICES-PROD-WIF'
-    - 'HMCTS-HUB-PROD-INTSVC-WIF'
-    - 'HMCTS-HUB-NONPROD-INTSVC-WIF'
-    - 'DCD-CFTAPPS-PROD-WIF'
-    - 'DTS-HERITAGE-EXTSVC-PROD-WIF'
-    - 'DTS-HERITAGE-INTSVC-PROD-WIF'
-    - 'DTS-HERITAGE-EXTSVC-STG-WIF'
-    - 'DTS-DATAINGEST-PROD-WIF'
-    - 'MOJ DCD Atlassian LVE'      # no WIF connection 
-    - 'Reform-CFT-Mgmt-WIF'
-    - 'DTS-SPS-SBOX-WIF'
-    - 'DTS-SPS-STG-WIF'
+    - 'DCD-CNP-DEV'
+    - 'DCD-CNP-QA'
+    - 'DCD-CNP-PROD'
+    - 'DTS-SHAREDSERVICES-DEV'
+    - 'DTS-SHAREDSERVICES-TEST'
+    - 'DTS-SHAREDSERVICES-DEMO'
+    - 'DTS-SHAREDSERVICES-STG'
+    - 'DTS-SHAREDSERVICES-PROD'
+    - 'HMCTS-HUB-PROD-INTSVC'
+    - 'HMCTS-HUB-NONPROD-INTSVC'
+    - 'DCD-CFTAPPS-PROD'
+    - 'DTS-HERITAGE-EXTSVC-PROD'
+    - 'DTS-HERITAGE-INTSVC-PROD'
+    - 'DTS-HERITAGE-EXTSVC-STG'
+    - 'DTS-DATAINGEST-PROD'
+    - 'MOJ DCD Atlassian LVE'
+    - 'Reform-CFT-Mgmt'
+    - 'DTS-SPS-SBOX'
+    - 'DTS-SPS-STG'
   - name: resourceGroup
     displayName: Resource group
     type: string
@@ -45,8 +45,12 @@ jobs:
       inputs:
         scriptType: bash
         scriptLocation: scriptPath
-        # hack to map subscription name to service connection name
-        azureSubscription: ${{ parameters.subscription }}
+        # Service connection is the subscription name plus -WIF,
+        # except MOJ DCD Atlassian LVE which has no WIF connection (to be decommissioned)
+        ${{ if eq(parameters.subscription, 'MOJ DCD Atlassian LVE') }}:
+          azureSubscription: ${{ parameters.subscription }}
+        ${{ else }}:
+          azureSubscription: ${{ parameters.subscription }}-WIF
         scriptPath: scripts/disable-resource-locking.sh
       env:
        RESOURCE_GROUPS_LIST: ${{ parameters.resourceGroup }}
