@@ -23,8 +23,6 @@ parameters:
     - 'HMCTS-HUB-PROD-INTSVC'
     - 'HMCTS-HUB-NONPROD-INTSVC'
     - 'DCD-CFTAPPS-PROD'
-    - 'Reform-CFT-VH-Dev'
-    - 'DCD-CFT-VH-Pilot'
     - 'DTS-HERITAGE-EXTSVC-PROD'
     - 'DTS-HERITAGE-INTSVC-PROD'
     - 'DTS-HERITAGE-EXTSVC-STG'
@@ -47,8 +45,12 @@ jobs:
       inputs:
         scriptType: bash
         scriptLocation: scriptPath
-        # hack to map subscription name to service connection name
-        azureSubscription: ${{ parameters.subscription }}
+        # Service connection is the subscription name plus -WIF,
+        # except MOJ DCD Atlassian LVE which has no WIF connection (to be decommissioned)
+        ${{ if eq(parameters.subscription, 'MOJ DCD Atlassian LVE') }}:
+          azureSubscription: ${{ parameters.subscription }}
+        ${{ else }}:
+          azureSubscription: ${{ parameters.subscription }}-WIF
         scriptPath: scripts/disable-resource-locking.sh
       env:
        RESOURCE_GROUPS_LIST: ${{ parameters.resourceGroup }}
