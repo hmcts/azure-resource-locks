@@ -23,8 +23,6 @@ parameters:
     - 'HMCTS-HUB-PROD-INTSVC-WIF'
     - 'HMCTS-HUB-NONPROD-INTSVC-WIF'
     - 'DCD-CFTAPPS-PROD-WIF'
-    - 'Reform-CFT-VH-Dev'          # no WIF connection
-    - 'DCD-CFT-VH-Pilot'           # no WIF connection 
     - 'DTS-HERITAGE-EXTSVC-PROD-WIF'
     - 'DTS-HERITAGE-INTSVC-PROD-WIF'
     - 'DTS-HERITAGE-EXTSVC-STG-WIF'
