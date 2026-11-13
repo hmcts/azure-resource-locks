@@ -10,29 +10,29 @@ parameters:
   - name: subscription
     displayName: Subscription
     type: string
-    default: DCD-CNP-DEV
+    default: DCD-CNP-DEV-WIF
     values:
-    - 'DCD-CNP-DEV'
-    - 'DCD-CNP-QA'
-    - 'DCD-CNP-PROD'
-    - 'DTS-SHAREDSERVICES-DEV'
-    - 'DTS-SHAREDSERVICES-TEST'
-    - 'DTS-SHAREDSERVICES-DEMO'
-    - 'DTS-SHAREDSERVICES-STG'
-    - 'DTS-SHAREDSERVICES-PROD'
-    - 'HMCTS-HUB-PROD-INTSVC'
-    - 'HMCTS-HUB-NONPROD-INTSVC'
-    - 'DCD-CFTAPPS-PROD'
-    - 'Reform-CFT-VH-Dev'
-    - 'DCD-CFT-VH-Pilot'
-    - 'DTS-HERITAGE-EXTSVC-PROD'
-    - 'DTS-HERITAGE-INTSVC-PROD'
-    - 'DTS-HERITAGE-EXTSVC-STG'
-    - 'DTS-DATAINGEST-PROD'
-    - 'MOJ DCD Atlassian LVE'
-    - 'Reform-CFT-Mgmt'
-    - 'DTS-SPS-SBOX'
-    - 'DTS-SPS-STG'
+    - 'DCD-CNP-DEV-WIF'
+    - 'DCD-CNP-QA-WIF'
+    - 'DCD-CNP-Prod-WIF'
+    - 'DTS-SHAREDSERVICES-DEV-WIF'
+    - 'DTS-SHAREDSERVICES-TEST-WIF'
+    - 'DTS-SHAREDSERVICES-DEMO-WIF'
+    - 'DTS-SHAREDSERVICES-STG-WIF'
+    - 'DTS-SHAREDSERVICES-PROD-WIF'
+    - 'HMCTS-HUB-PROD-INTSVC-WIF'
+    - 'HMCTS-HUB-NONPROD-INTSVC-WIF'
+    - 'DCD-CFTAPPS-PROD-WIF'
+    - 'Reform-CFT-VH-Dev'          # no WIF connection
+    - 'DCD-CFT-VH-Pilot'           # no WIF connection 
+    - 'DTS-HERITAGE-EXTSVC-PROD-WIF'
+    - 'DTS-HERITAGE-INTSVC-PROD-WIF'
+    - 'DTS-HERITAGE-EXTSVC-STG-WIF'
+    - 'DTS-DATAINGEST-PROD-WIF'
+    - 'MOJ DCD Atlassian LVE'      # no WIF connection 
+    - 'Reform-CFT-Mgmt-WIF'
+    - 'DTS-SPS-SBOX-WIF'
+    - 'DTS-SPS-STG-WIF'
   - name: resourceGroup
     displayName: Resource group
     type: string

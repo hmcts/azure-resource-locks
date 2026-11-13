@@ -24,69 +24,69 @@ stages:
       steps:
       - template: run-enable-locks.yaml
         parameters:
-          service_connection: DTS-SHAREDSERVICES-PROD
+          service_connection: DTS-SHAREDSERVICES-PROD-WIF
     - job: SDS_STG
       steps:
       - template: run-enable-locks.yaml
         parameters:
-          service_connection: DTS-SHAREDSERVICES-STG
+          service_connection: DTS-SHAREDSERVICES-STG-WIF
     - job: CNP_PROD
       steps:
       - template: run-enable-locks.yaml
         parameters:
-          service_connection: DCD-CNP-PROD
+          service_connection: DCD-CNP-Prod-WIF
     - job: CNP_Dev
       steps:
       - template: run-enable-locks.yaml
         parameters:
-          service_connection: DCD-CNP-DEV
+          service_connection: DCD-CNP-DEV-WIF
     - job: CNP_QA
       steps:
       - template: run-enable-locks.yaml
         parameters:
-          service_connection: DCD-CNP-QA
+          service_connection: DCD-CNP-QA-WIF
     - job: HUB_PROD
       steps:
         - template: run-enable-locks.yaml
           parameters:
-            service_connection: HMCTS-HUB-PROD-INTSVC
+            service_connection: HMCTS-HUB-PROD-INTSVC-WIF
     - job: HUB_NON_PROD
       steps:
         - template: run-enable-locks.yaml
           parameters:
-            service_connection: HMCTS-HUB-NONPROD-INTSVC
+            service_connection: HMCTS-HUB-NONPROD-INTSVC-WIF
     - job: DCD_CFT_PROD
       steps:
         - template: run-enable-locks.yaml
           parameters:
-            service_connection: DCD-CFTAPPS-PROD
+            service_connection: DCD-CFTAPPS-PROD-WIF
     - job: DTS_HERITAGE_EXTSVC_PROD
       steps:
         - template: run-enable-locks.yaml
           parameters:
-            service_connection: DTS-HERITAGE-EXTSVC-PROD
+            service_connection: DTS-HERITAGE-EXTSVC-PROD-WIF
     - job: DTS_HERITAGE_INTSVC_PROD
       steps:
         - template: run-enable-locks.yaml
           parameters:
-            service_connection: DTS-HERITAGE-INTSVC-PROD
+            service_connection: DTS-HERITAGE-INTSVC-PROD-WIF
     - job: DTS_HERITAGE_EXTSVC_STG
       steps:
         - template: run-enable-locks.yaml
           parameters:
-            service_connection: DTS-HERITAGE-EXTSVC-STG
+            service_connection: DTS-HERITAGE-EXTSVC-STG-WIF
     - job: DTS_DATAINGEST_PROD
       steps:
         - template: run-enable-locks.yaml
           parameters:
-            service_connection: DTS-DATAINGEST-PROD
+            service_connection: DTS-DATAINGEST-PROD-WIF
     - job: MOJ_DCD_Atlassian_LVE
       steps:
         - template: run-enable-locks.yaml
           parameters:
-            service_connection: 'MOJ DCD Atlassian LVE'
+            service_connection: 'MOJ DCD Atlassian LVE'   # no WIF connection exists yet
     - job: Reform_CFT_Mgmt
       steps:
         - template: run-enable-locks.yaml
           parameters:
-            service_connection: REFORM-CFT-MGMT
+            service_connection: Reform-CFT-Mgmt-WIF
